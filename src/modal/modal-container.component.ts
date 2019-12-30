@@ -79,7 +79,9 @@ export class ModalContainerComponent implements OnInit, OnDestroy {
 
   @HostListener('mousedown', ['$event'])
   onClickStarted(event: MouseEvent): void {
-    this.clickStartedInContent = event.target !== this._element.nativeElement;
+    const SCROLL_BAR_WIDTH = 30;
+    const clickedOnScrollBar = event.clientX > (document.documentElement.clientWidth - SCROLL_BAR_WIDTH);
+    this.clickStartedInContent = clickedOnScrollBar || event.target !== this._element.nativeElement;
   }
 
   @HostListener('mouseup', ['$event'])
